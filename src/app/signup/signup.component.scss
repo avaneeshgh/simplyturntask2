@@ -1,0 +1,56 @@
+form {
+  width: mx-auto;
+}
+
+form span {
+  color: yellowgreen;
+  margin-left: 2rem;
+  font-size: 2rem;
+  border-bottom: 4px solid aqua;
+}
+
+.bg {
+  background-image: url(./../../assets/signup.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 900px;
+}
+
+.frm {
+  position: relative;
+  top: 5%;
+}
+
+mat-form-field,
+mat-label {
+  font-size: 1.3em;
+}
+
+mat-form-field,
+mat-radio-group {
+  margin: 10px 10px 10px 10px;
+}
+
+mat-form-field,
+textarea {
+  width: 100%;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 5px;
+}
+mat-radio-button,
+mat-label {
+  position: relative;
+  margin-left: 5rem;
+  font-size: 13px;
+  font-weight: bold;
+}
+.button-row button {
+  margin: 5px;
+}
+
+label {
+  font-weight: bolder;
+}

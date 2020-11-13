@@ -1,0 +1,260 @@
+<body class="bg">
+  <div>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <form
+          #userForm="ngForm"
+          (ngSubmit)="onSubmit(userForm.value); userForm.reset()"
+          class="frm"
+        >
+          <div class="text-center" style="color: black">
+            <h1>CREATE AN ACCOUNT</h1>
+          </div>
+
+          <!-- Name -->
+          <div class="form-group mt-3">
+            <label for="name">FULLNAME:</label>
+            <!-- apply bs4 class is-invalid when condition satisfies -->
+            <input
+              pInputText
+              required
+              class="form-control"
+              [class.is-invalid]="!n.valid && n.touched"
+              [class.is-valid]="n.valid && n.touched"
+              type="text"
+              id="name"
+              #n="ngModel"
+              name="name"
+              ngModel
+            />
+            <small class="text-danger" [class.d-none]="n.valid || n.untouched"
+              >Name is required</small
+            >
+          </div>
+
+          <!-- Roll No -->
+          <div class="form-group mt-3">
+            <label for="roll">ROLL NO:</label>
+            <!-- apply bs4 class is-invalid when condition satisfies -->
+            <input
+              pInputText
+              required
+              class="form-control"
+              [class.is-invalid]="!rol.valid && rol.touched"
+              [class.is-valid]="rol.valid && rol.touched"
+              type="text"
+              id="roll"
+              #rol="ngModel"
+              name="rollNo"
+              ngModel
+            />
+            <small
+              class="text-danger"
+              [class.d-none]="rol.valid || rol.untouched"
+              >Roll No is required</small
+            >
+          </div>
+
+          <!-- Class -->
+          <div class="form-group mt-3">
+            <label for="roll">CLASS:</label>
+            <!-- apply bs4 class is-invalid when condition satisfies -->
+            <!-- <input
+              pInputText
+              required
+              class="form-control"
+              [class.is-invalid]="!rol.valid && rol.touched"
+              [class.is-valid]="rol.valid && rol.touched"
+              type="number"
+              id="roll"
+              #rol="ngModel"
+              name="rollNo"
+              ngModel
+            /> -->
+
+            <p-dropdown
+              [options]="classes"
+              #cla="ngModel"
+              optionLabel="label"
+              ngModel
+              name="class"
+              required
+            ></p-dropdown>
+
+            <small
+              class="text-danger"
+              [class.d-none]="cla.valid || cla.untouched"
+              >Class is required</small
+            >
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">EMAIL:</label>
+            <input
+              pInputText
+              required
+              class="form-control"
+              type="email"
+              id="email"
+              name="email"
+              #n1="ngModel"
+              [class.is-invalid]="n1.touched && !emailState"
+              [class.is-valid]="emailState && n1.touched"
+              (change)="validateEmail(n1.value)"
+              ngModel
+            />
+            <small class="text-danger" *ngIf="n1.errors?.required && n1.touched"
+              >Email is required!</small
+            >
+            <small
+              class="text-danger"
+              *ngIf="!emailState && !n1.errors?.required && n1.touched"
+              >Email is invalid</small
+            >
+          </div>
+
+          <!-- Gender -->
+          <label for="gen">GENDER:</label>
+          <mat-radio-group
+            ngModel
+            name="gender"
+            #gender="ngModel"
+            id="gen"
+            required
+          >
+            <mat-radio-button value="M">Male</mat-radio-button>
+            <mat-radio-button value="F">Female</mat-radio-button>
+            <mat-radio-button value="O">Others</mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="gender.touched && gender.invalid">
+            <p class="mat-body-1">Please Choose..</p>
+          </mat-error>
+
+          <!-- PASSWORD -->
+          <div class="form-group">
+            <label for="x3">PASSWORD:</label>
+            <input
+              required
+              minlength="8"
+              class="form-control"
+              [class.is-invalid]="
+                n2.touched && (n2.errors?.required || n2.errors?.minlength)
+              "
+              type="password"
+              id="x3"
+              name="password"
+              #n2="ngModel"
+              ngModel
+            />
+            <small class="text-danger" *ngIf="n2.touched && n2.errors?.required"
+              >Password field is required!</small
+            >
+            <small
+              class="text-danger"
+              *ngIf="n2.errors?.minlength && n2.touched"
+              >Password must have atleast 8 chars..!</small
+            >
+          </div>
+
+          <!-- confirm password -->
+          <div class="form-group">
+            <label for="x10">CONFIRM PASSWORD:</label>
+            <input
+              class="form-control"
+              [class.is-invalid]="confirmpassword.touched && !verifyPassword"
+              [class.is-valid]="
+                confirmpassword.touched &&
+                verifyPassword &&
+                !n2.errors?.minlength
+              "
+              type="password"
+              (blur)="validatePassword(n2.value, confirmpassword.value)"
+              id="x10"
+              #confirmpassword="ngModel"
+              name="confirmpassword"
+              ngModel
+            />
+            <small
+              class="text-danger"
+              *ngIf="confirmpassword.touched && !verifyPassword"
+              >Password does not match!</small
+            >
+          </div>
+
+          <!-- Address -->
+          <div class="form-group mt-3">
+            <label for="address">ADDRESS:</label>
+            <!-- apply bs4 class is-invalid when condition satisfies -->
+            <input
+              pInputText
+              required
+              class="form-control"
+              [class.is-invalid]="!ad.valid && ad.touched"
+              [class.is-valid]="ad.valid && ad.touched"
+              type="text"
+              id="address"
+              #ad="ngModel"
+              name="address"
+              ngModel
+            />
+            <small class="text-danger" [class.d-none]="ad.valid || ad.untouched"
+              >Address is required</small
+            >
+          </div>
+
+          <!-- MOBILE NUMBER -->
+          <div class="form-group">
+            <label for="x2">MOBILE-NO:</label>
+            <input
+              class="form-control"
+              type="tel"
+              required
+              #phone="ngModel"
+              [class.is-valid]="
+                phone.touched &&
+                !phone.errors?.pattern &&
+                !phone.errors?.required
+              "
+              [class.is-invalid]="phone.invalid && phone.touched"
+              pattern="^\d{10}$"
+              id="x2"
+              name="phone"
+              ngModel
+            />
+            <!-- <small class="text-danger" [class.d-none]="phone.valid || phone.untouched">phone number is required and must be  be 10 digits</small> -->
+
+            <small
+              class="text-danger"
+              *ngIf="phone.errors?.required && phone.touched"
+              >Phone number is required</small
+            >
+            <small
+              class="text-danger"
+              *ngIf="
+                phone.errors?.pattern &&
+                phone.touched &&
+                !phone.errors?.required
+              "
+              >Phone number must be 10 digits long!</small
+            >
+          </div>
+
+          <!-- button -->
+          <div class="text-center">
+            <button
+              [disabled]="
+                userForm.form.invalid || !verifyPassword || !emailState
+              "
+              class="btn btn-primary"
+              type="submit"
+            >
+              REGISTER
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,53 @@
+.bg-img {
+  background-image: url("./../../assets/bg2.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 87%;
+}
+
+.fix {
+  position: relative;
+  top: 20%;
+}
+
+mat-card-header,
+mat-card-title,
+mat-card-actions,
+mat-card-footer {
+  justify-content: center;
+  display: flex;
+}
+
+.loginstyle {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: darkslategray;
+  font-weight: bold;
+  font-size: 1.5;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-card {
+  width: auto;
+  position: relative;
+  justify-content: center;
+  top: 50%;
+  height: auto;
+  box-shadow: saturation($color: #000000);
+  background-image: url(./../../assets/cardbgimg1.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+mat-form-field,
+mat-label {
+  font-size: 1.2em;
+}
+
+mat-form-field {
+  margin: 5px 5px 5px 5px;
+}

@@ -1,0 +1,67 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    [ngClass]="{ hidden: (isHandset$ | async) === false }"
+    fixedInViewport="false"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="home"><mat-icon>home</mat-icon>Home</a>
+      <a mat-list-item *ngIf="!loggedIn" routerLink="login"
+        ><mat-icon>login</mat-icon>Login</a
+      >
+      <!-- <a mat-list-item *ngIf="loggedIn" (click)="authServiceObj.logOut()"
+        ><mat-icon>logout</mat-icon>Logout</a
+      > -->
+      <a mat-list-item routerLink="signup">Link 3</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="accent">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Make a Note</span>
+
+      <span class="spacer"></span>
+
+      <ul [ngClass]="{ hidden: (isHandset$ | async) === true }">
+        <li>
+          <a mat-button routerLink="/home"><mat-icon>home</mat-icon>Home</a>
+        </li>
+
+        <li *ngIf="!loggedIn">
+          <a mat-button routerLink="login"><mat-icon>login</mat-icon>Login</a>
+        </li>
+
+        <li *ngIf="!loggedIn">
+          <a mat-button routerLink="usersignup">Signup</a>
+        </li>
+
+        <li *ngIf="loggedIn">
+          <button mat-button (click)="userservice.logOut()">
+            <mat-icon>logout</mat-icon>
+          </button>
+        </li>
+
+        <li *ngIf="loggedIn">
+          <a mat-button (click)="onDashBoardClick()"
+            ><mat-icon>account_circle</mat-icon>My Dashboard</a
+          >
+        </li>
+      </ul>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

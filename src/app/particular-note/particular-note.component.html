@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="backbutton-area">
+    <div class="row">
+      <div class="col text-left">
+        <p-button
+          label="Back"
+          icon="pi pi-chevron-left"
+          styleClass="p-button-sm"
+          (click)="onBackButton()"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="detailsarea">
+    <p-header>
+      <div class="row">
+        <div class="col text-left">
+          <span class="head">Created : </span
+          ><span class="ins"
+            >{{ presentNote?.createdDate | date: "mediumDate" }} &nbsp;
+            {{ presentNote?.createdDate | date: "shortTime" }}
+          </span>
+        </div>
+        <div class="col text-center">
+          <span class="head">Last Modified : </span
+          ><span class="ins"
+            >{{ presentNote?.lastModifiedDate | date: "mediumDate" }} &nbsp;
+            {{ presentNote?.lastModifiedDate | date: "shortTime" }}
+          </span>
+        </div>
+        <div class="col text-right">
+          <span class="head">Last Modified By : </span
+          ><span class="ins">{{ presentNote?.lastModifiedBy }} </span>
+        </div>
+      </div>
+    </p-header>
+  </div>
+
+  <div class="buttonarea">
+    <div class="row">
+      <div class="col text-left">
+        <button
+          *ngIf="!isEditorDisplay"
+          pButton
+          pRipple
+          type="button"
+          label="Edit"
+          icon="pi pi-pencil"
+          (click)="onEdit()"
+          class="p-button-warning"
+        ></button>
+      </div>
+      <div class="col text-center">
+        <button
+          *ngIf="isEditorDisplay"
+          pButton
+          pRipple
+          type="button"
+          label="Update"
+          icon="pi pi-check"
+          (click)="onUpdate()"
+          class="p-button-success"
+        ></button>
+      </div>
+      <div class="col text-right" *ngIf="!isTeacher">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Delete"
+          icon="pi pi-trash"
+          (click)="onDelete()"
+          class="p-button-danger"
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="editorArea">
+    <span><h2>Note Name :</h2></span>
+
+    <input
+      type="text"
+      pInputText
+      [disabled]="!isEditorDisplay"
+      [(ngModel)]="newNoteName"
+    />
+    <span><h2>Editor :</h2></span>
+    <p-editor
+      [(ngModel)]="newNoteDescription"
+      [readonly]="!isEditorDisplay"
+      [style]="{ height: '400px' }"
+    >
+      <ng-template pTemplate="header">
+        <span class="ql-formats">
+          <button type="button" class="ql-bold" aria-label="Bold"></button>
+          <button type="button" class="ql-italic" aria-label="Italic"></button>
+          <button
+            type="button"
+            class="ql-underline"
+            aria-label="Underline"
+          ></button>
+        </span>
+      </ng-template>
+    </p-editor>
+  </div>
+</div>

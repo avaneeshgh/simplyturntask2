@@ -1,0 +1,190 @@
+<div class="container-fluid">
+  <div class="backbutton-area" *ngIf="isTeacher">
+    <div class="row">
+      <div class="col text-left">
+        <p-button
+          label="Back"
+          icon="pi pi-chevron-left"
+          styleClass="p-button-sm"
+          (click)="onBackButtonToTeacher()"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="detailsarea">
+    <div class="container">
+      <p-header>
+        <div class="row">
+          <div class="col text-left">
+            <span class="head">Full Name : </span
+            ><span class="ins">{{ presentUser?.name }} </span>
+          </div>
+          <div class="col text-center">
+            <span class="head">Roll No : </span
+            ><span class="ins">{{ presentUser?.rollNo }} </span>
+          </div>
+          <div class="col text-right">
+            <span class="head">Gender :</span
+            ><span class="ins">{{ presentUser?.gender }} </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-left">
+            <span class="head">Class : </span
+            ><span class="ins">{{ presentUser?.class }} </span>
+          </div>
+          <div class="col text-center">
+            <span class="head">Phone : </span
+            ><span class="ins">{{ presentUser?.phoneNo }} </span>
+          </div>
+          <div class="col text-right">
+            <span class="head">Email :</span
+            ><span class="ins">{{ presentUser?.email }} </span>
+          </div>
+        </div>
+      </p-header>
+
+      <div class="buttonarea" *ngIf="!isTeacher">
+        <div class="row">
+          <div class="col text-right">
+            <button
+              pButton
+              pRipple
+              type="button"
+              label="New Note"
+              icon="pi pi-plus"
+              (click)="onCreateNote()"
+              class="p-button-success"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tablearea">
+    <p-table
+      #dt
+      [value]="presentUserNotes"
+      dataKey="id"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      [rowsPerPageOptions]="[10, 15]"
+      [paginator]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [filterDelay]="0"
+      [globalFilterFields]="[
+        'noteName',
+        'createdDate',
+        'lastModifiedDate',
+        'lastModifiedBy'
+      ]"
+    >
+      <ng-template pTemplate="caption">
+        <div class="table-header">
+          <span class="t-head"> List of Notes</span>
+          <span class="p-input-icon-left spacer">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Global Filter"
+            />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr class="t-col-head">
+          <th pSortableColumn="noteName">
+            NOTE NAME <p-sortIcon field="noteName"></p-sortIcon>
+          </th>
+          <th pSortableColumn="createdDate">
+            CREATED DATE <p-sortIcon field="createdDate"></p-sortIcon>
+          </th>
+          <th pSortableColumn="lastModifiedDate">
+            LAST MODIF DATE <p-sortIcon field="lastModifiedDate"></p-sortIcon>
+          </th>
+          <th pSortableColumn="lastModifiedBy">
+            LAST MODIF BY <p-sortIcon field="lastModifiedBy"></p-sortIcon>
+          </th>
+          <th>OPTIONS</th>
+        </tr>
+        <tr>
+          <th>
+            <input
+              pInputText
+              type="text"
+              (input)="dt.filter($event.target.value, 'noteName', 'contains')"
+              placeholder="Type Here"
+              class="p-column-filter"
+            />
+          </th>
+
+          <th>
+            <input
+              pInputText
+              type="text"
+              (input)="
+                dt.filter($event.target.value, 'createdDate', 'contains')
+              "
+              placeholder="Type Here"
+              class="p-column-filter"
+            />
+          </th>
+          <th>
+            <input
+              pInputText
+              type="text"
+              (input)="
+                dt.filter($event.target.value, 'lastModifiedDate', 'contains')
+              "
+              placeholder="Type Here"
+              class="p-column-filter"
+            />
+          </th>
+          <th>
+            <input
+              pInputText
+              type="text"
+              (input)="
+                dt.filter($event.target.value, 'lastModifiedBy', 'contains')
+              "
+              placeholder="Type Here"
+              class="p-column-filter"
+            />
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-note>
+        <tr>
+          <td>
+            {{ note.noteName }}
+          </td>
+          <td>{{ note.createdDate | date: "mediumDate" }}</td>
+          <td>
+            {{ note.lastModifiedDate | date: "mediumDate" }} &nbsp;&nbsp;
+            {{ note.lastModifiedDate | date: "shortTime" }}
+          </td>
+          <td>
+            {{ note.lastModifiedBy }}
+          </td>
+          <td>
+            <button
+              pButton
+              label="View More"
+              (click)="onViewNote(note._id)"
+              class="p-button-help"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="6">No Notes found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

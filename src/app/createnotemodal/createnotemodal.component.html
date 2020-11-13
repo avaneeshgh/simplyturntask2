@@ -1,0 +1,45 @@
+<div class="content-container">
+  <mat-toolbar color="accent">Please Enter Details</mat-toolbar>
+  <mat-icon id="close-icon" (click)="onCloseDialog()">close</mat-icon>
+</div>
+
+<div class="container-fluid">
+  <form ngForm #noteform="ngForm">
+    <div class="row">
+      <div class="col">
+        <div class="example-full-width">
+          <mat-form-field>
+            <mat-label>Note Name</mat-label>
+            <input matInput ngModel name="noteName" #notename="ngModel" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea
+              matInput
+              ngModel
+              name="noteDescription"
+              #message="ngModel"
+              rows="10"
+            ></textarea>
+          </mat-form-field>
+
+          <div class="button-row">
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="noteform.invalid"
+              [mat-dialog-close]="noteform"
+            >
+              Submit
+            </button>
+            <button mat-raised-button color="warn" [mat-dialog-close]="null">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

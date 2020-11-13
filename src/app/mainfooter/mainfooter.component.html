@@ -1,0 +1,47 @@
+<footer>
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12 segment-one md-mb-30 sm-mb-30">
+          <h2>Make a Note</h2>
+          <p class="caption">
+            Stay Hungry.
+            <br />
+            Stay Foolish.
+          </p>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12 segment-two md-mb-30 sm-mb-30">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a routerLink="/">Home</a></li>
+            <li><a routerLink="/aboutus">About</a></li>
+            <li><a routerLink="/contactus">Contact-Us</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12 segment-three sm-mb-30">
+          <h2>Follow Us</h2>
+          <p>
+            Please Follow us on Social Media Platforms in order to keep updated.
+          </p>
+
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href=""><i class="fa fa-twitter"></i></a>
+          <a href=""><i class="fa fa-instagram"></i></a>
+          <a href=""><i class="fa fa-pinterest"></i></a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12 segment-four sm-mb-30">
+          <h2>Join us</h2>
+          <p>Subscribe to our Mailing List.</p>
+          <form ngForm (submit)="onMail(mailform)" #mailform="ngForm">
+            <input ngModel name="email" type="email" id="" />
+            <input type="submit" value="Subscribe" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="footer-bottom-text">All Right reserved by @copy:Avaneesh 2020</p>
+</footer>
