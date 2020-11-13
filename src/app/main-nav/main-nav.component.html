@@ -31,7 +31,16 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Make a Note</span>
+
+      <a routerLink="/">
+        <img
+          [ngClass]="{ hidden1: (isHandset$ | async) === true }"
+          class="logoimg"
+          src="./../../assets/mlogo.jpg"
+          alt="logo"
+        />
+        <span class="logotext">MAKE NOTEZ</span>
+      </a>
 
       <span class="spacer"></span>
 
