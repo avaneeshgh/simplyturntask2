@@ -26,13 +26,7 @@ export class NoteService implements OnInit {
 
 
   saveNote(noteObj: any) {
-    this.http.post<{ message: string }>('/notes/saveNote', noteObj).subscribe(res => {
-
-      if (res) {
-        //message
-        this.notification.success("Note Successfully Saved!");
-      }
-     })
+    return this.http.post<{ message: string, noteDetails: any }>('/notes/saveNote', noteObj);
   }
 
 
@@ -51,15 +45,7 @@ export class NoteService implements OnInit {
   deleteNote(noteObj) {
 
     //noteId,userId
-    this.http.post<{ message: string }>('/notes/deleteNote', noteObj).subscribe(res => {
-      if (res) {
-        //message
-        this.notification.success("Note Successfully Deleted!");
-
-        //routing
-        this.router.navigateByUrl('studentdashboard');
-      }
-     })
+    return this.http.post<{ message: string }>('/notes/deleteNote', noteObj);
   }
 
 }

@@ -21,7 +21,7 @@ export class DialogService {
 
   openUserInfoDialog() {
     return this.dialog.open(CreatenotemodalComponent, {
-      width: "650px",
+      width: "800px",
       panelClass: "confirm-dialog-container",
       disableClose: true,
     });

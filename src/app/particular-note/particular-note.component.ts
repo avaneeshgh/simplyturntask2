@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from 'app-services/dialog-service';
 import { NoteService } from 'app-services/note.service';
+import { NotificationService } from 'app-services/notification-service';
 import { UserService } from 'app-services/user.service';
 
 
@@ -16,7 +17,8 @@ export class ParticularNoteComponent implements OnInit {
     private noteservice: NoteService,
     private userservice: UserService,
     private dialogservice: DialogService,
-    private router: Router) { }
+    private router: Router,
+  private notification: NotificationService) { }
   presentNote: any;
   presentNoteId: string;
 
@@ -64,8 +66,16 @@ export class ParticularNoteComponent implements OnInit {
           userId: this.presentNote.userId
         };
 
-        console.log(noteObj);
-        this.noteservice.deleteNote(noteObj);
+
+        this.noteservice.deleteNote(noteObj).subscribe(res => {
+          if (res) {
+            //message
+            this.notification.success("Note Successfully Deleted!");
+
+            //routing
+            this.router.navigateByUrl('studentdashboard/'+noteObj.userId);
+          }
+         })
 
         this.isEditorDisplay = false;
       }

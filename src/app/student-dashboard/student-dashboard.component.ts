@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from 'app-services/dialog-service';
 import { NoteService } from 'app-services/note.service';
+import { NotificationService } from 'app-services/notification-service';
 import { UserService } from 'app-services/user.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class StudentDashboardComponent implements OnInit {
     private dialogservice: DialogService,
     private noteservice: NoteService,
     private router: Router,
-  private route:ActivatedRoute) { }
+    private route: ActivatedRoute,
+  private notification:NotificationService) { }
 
   presentUser: any;
   presentUserNotes: any;
@@ -39,7 +41,7 @@ export class StudentDashboardComponent implements OnInit {
       let userObj={id:this.presentUserId};
       this.userservice.getUserDetails(userObj).subscribe(uresult => {
         this.presentUser = uresult.userDetails;
-        console.log(uresult.userDetails);
+
         this.afterGettingUser(this.presentUserId);
       })
     })
@@ -66,7 +68,13 @@ export class StudentDashboardComponent implements OnInit {
   onCreateNote()
   {
     this.dialogservice.openUserInfoDialog().afterClosed().subscribe(res => {
-      this.noteservice.saveNote(res.value);
+      this.noteservice.saveNote(res.value).subscribe(res => {
+
+        //message
+        this.notification.success("Note Successfully Saved!");
+        this.afterGettingUser(res.noteDetails.userId);
+
+     })
     }, err => {
 
       })

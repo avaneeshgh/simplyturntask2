@@ -35,7 +35,7 @@ export class MainNavComponent implements OnInit {
     this.userservice.getuserDetailsSubjectListener().subscribe(res => {
 
 
-      console.log(res);
+      //console.log(res);
       if (res.designation == "teacher")
       {
         this.isTeacher = true;
@@ -50,7 +50,7 @@ export class MainNavComponent implements OnInit {
 
   onDashBoardClick()
   {
-    console.log(this.isTeacher);
+   // console.log(this.isTeacher);
     if (this.isTeacher==true) {
 
       console.log('teacher dashboard');

@@ -170,7 +170,7 @@ router.post('/saveNote', verifyToken,(req, res, next) => {
       return res.status(401).json({ message: "Error while saving Note! Please Try Again" });
     }
 
-    return res.status(200).json({ message: "successfully saved" });
+    return res.status(200).json({ message: "successfully saved",noteDetails:noteObj });
 
   });
 
