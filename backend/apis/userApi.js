@@ -50,15 +50,6 @@ router.post("/usersignup", (req, res) => {
 
                   res.status(200).json({ message: "Successfully Registared!" });
 
-                  // let transportObj = {
-                  //   email: req.body.email,
-                  //   message:
-                  //     "Thank you for your interest in Our Application. Now you are ready to make notes!",
-                  //   name: req.body.name,
-                  // };
-                  // sendEmail(transportObj, (info) => {
-                  //   res.status(200).json({ message: "Successfully Registared!" });
-                  // });
                 }
               });
             }
@@ -138,9 +129,12 @@ router.post("/login", (req, res, next) => {
 router.post('/getUserDetails',verifyToken, (req, res, next) => {
 
   const userObj = req.body;
+  const payloadUserId = req.body.payloadUserId;
 
+  if (req.body.payloadDesignation == "teacher" || payloadUserId == userObj.id)
+
+  {
   var usercollectionObj = req.app.locals.usersCollectionObj;
-
   usercollectionObj.findOne({ _id: new ObjectId(userObj.id) },(err, userresult) => {
     if (err) {
       console.log("Error while getting user", err);
@@ -152,23 +146,31 @@ router.post('/getUserDetails',verifyToken, (req, res, next) => {
 
   })
 
+  }
+  else
+  {
+    return res.status(401).json({ message: "Unauthorized access" });
+  }
+
 })
 
 
 //getStudents
 router.post('/getAllUsers',verifyToken, (req, res, next) => {
-
-
   var usercollectionObj = req.app.locals.usersCollectionObj;
+  //return result only if it comes from teacher
+  const payloadDesignation = req.body.payloadDesignation;
 
+  if (payloadDesignation !== "teacher")
+  {
+    return res.status(401).json({ message: "Unauthorized access" });
+  }
   usercollectionObj.find({designation:"student"}).toArray((err, usersresult) => {
     if (err) {
       console.log("Error while getting users", err);
       return res.status(401).json({ message: "Failed to get users" });
     }
     else {
-      console.log('stage 2')
-      console.log(usersresult)
       res.status(200).json({ message: "success", usersDetails: usersresult });
     }
   })

@@ -15,11 +15,11 @@ export class AppComponent implements OnInit {
 
     if (localStorage.getItem('Token') !== null && localStorage.getItem('Token') !== undefined) {
       this.userservice.getLoggedInListener();
-      this.userservice.getuserDetailsSubjectListener();
+      //this.userservice.getuserDetailsSubjectListener();
       this.userservice.getUserBasedOnToken().subscribe(res => {
         if (res) {
           this.userservice.loggedInSubject.next(true);
-          this.userservice.userObjSubject.next(res.userDetails);
+          //this.userservice.userObjSubject.next(res.userDetails);
         }
       })
 

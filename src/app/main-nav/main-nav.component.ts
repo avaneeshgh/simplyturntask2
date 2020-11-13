@@ -31,35 +31,18 @@ export class MainNavComponent implements OnInit {
     this.userservice.getLoggedInListener().subscribe(res => {
       this.loggedIn = res;
     })
-
-    this.userservice.getuserDetailsSubjectListener().subscribe(res => {
-
-
-      //console.log(res);
-      if (res.designation == "teacher")
-      {
-        this.isTeacher = true;
-      }
-      else
-      {
-        this.presentUserId = res._id;
-        }
-
-    })
   }
 
   onDashBoardClick()
   {
-   // console.log(this.isTeacher);
-    if (this.isTeacher==true) {
-
-      console.log('teacher dashboard');
-      this.router.navigateByUrl('teacherdashboard');
-    }
-    else {
-
-      this.router.navigateByUrl(`studentdashboard/${this.presentUserId}`);
-    }
+    this.userservice.getUserBasedOnToken().subscribe(res => {
+      if (res.userDesignation == "teacher") {
+        this.router.navigateByUrl('teacherdashboard');
+      }
+      else
+      {
+        this.router.navigateByUrl(`studentdashboard/${res.userDetails._id}`);
+      }
+    })
   }
-
 }
