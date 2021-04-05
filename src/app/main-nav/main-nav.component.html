@@ -14,10 +14,12 @@
       <a mat-list-item *ngIf="!loggedIn" routerLink="login"
         ><mat-icon>login</mat-icon>Login</a
       >
-      <!-- <a mat-list-item *ngIf="loggedIn" (click)="authServiceObj.logOut()"
+      <a mat-list-item *ngIf="loggedIn" (click)="userservice.logOut()"
         ><mat-icon>logout</mat-icon>Logout</a
-      > -->
-      <a mat-list-item routerLink="signup">Link 3</a>
+      >
+      <a mat-list-item *ngIf="!loggedIn" routerLink="signup">Signup</a>
+
+      <a mat-list-item routerLink="scanner">Scanner</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

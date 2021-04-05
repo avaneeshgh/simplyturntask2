@@ -1,4 +1,4 @@
-import { AuthInterceptor } from "./../../app-services/auth-interceptor";
+import { AuthInterceptor } from './../../app-services/auth-interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -12,10 +12,10 @@ import { FormsModule } from '@angular/forms';
 
 //primeng
 import { DropdownModule } from 'primeng/dropdown';
-import { TableModule } from "primeng/table";
-import {InputTextModule} from 'primeng/inputtext';
-import { ButtonModule } from "primeng/button";
-import {EditorModule} from 'primeng/editor';
+import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { EditorModule } from 'primeng/editor';
 
 //Material
 import { MatCardModule } from '@angular/material/card';
@@ -46,9 +46,8 @@ import { TeacherDashboardComponent } from './teacher-dashboard/teacher-dashboard
 import { ParticularNoteComponent } from './particular-note/particular-note.component';
 import { CreatenotemodalComponent } from './createnotemodal/createnotemodal.component';
 import { MainfooterComponent } from './mainfooter/mainfooter.component';
-
-
-
+import { ScannerComponent } from './scanner/scanner.component';
+import { NgQrScannerModule } from 'angular2-qrscanner';
 
 @NgModule({
   declarations: [
@@ -63,7 +62,8 @@ import { MainfooterComponent } from './mainfooter/mainfooter.component';
     TeacherDashboardComponent,
     ParticularNoteComponent,
     CreatenotemodalComponent,
-    MainfooterComponent
+    MainfooterComponent,
+    ScannerComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +71,7 @@ import { MainfooterComponent } from './mainfooter/mainfooter.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgQrScannerModule,
     //primeng
     InputTextModule,
     DropdownModule,
@@ -82,25 +83,25 @@ import { MainfooterComponent } from './mainfooter/mainfooter.component';
     MatInputModule,
     MatButtonModule,
     MatToolbarModule,
-  MatExpansionModule,
-  MatProgressSpinnerModule,
-  MatIconModule,
-  MatProgressBarModule,
-  MatSelectModule,
-  MatDividerModule,
-  MatMenuModule,
-  MatDialogModule,
-  MatSnackBarModule,
-  MatPaginatorModule,
-  MatRadioModule,
-  LayoutModule,
-  MatSidenavModule,
-  MatListModule,
-
+    MatExpansionModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatSelectModule,
+    MatDividerModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatPaginatorModule,
+    MatRadioModule,
+    LayoutModule,
+    MatSidenavModule,
+    MatListModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-              { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

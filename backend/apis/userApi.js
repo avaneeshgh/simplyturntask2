@@ -176,6 +176,7 @@ router.post('/getAllUsers',verifyToken, (req, res, next) => {
   })
 })
 
+
 router.post('/getUserBasedOnToken', verifyToken, (req, res, next) => {
 
   let userId = req.body.payloadUserId;
@@ -194,8 +195,5 @@ router.post('/getUserBasedOnToken', verifyToken, (req, res, next) => {
     })
 
 })
-
-
-
 
 module.exports = router;
