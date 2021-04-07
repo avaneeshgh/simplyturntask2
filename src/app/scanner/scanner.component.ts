@@ -10,42 +10,54 @@ import { NotificationService } from 'app-services/notification-service';
 })
 export class ScannerComponent implements OnInit {
   constructor(private notification: NotificationService) {}
-  @ViewChild(QrScannerComponent, { static: false })
-  qrScannerComponent: QrScannerComponent;
-  // constructor() { }
+  // @ViewChild(QrScannerComponent, { static: false })
+  // qrScannerComponent: QrScannerComponent;
+  // // constructor() { }
 
   ngOnInit() {}
 
-  ngAfterViewInit(): void {
-    this.qrScannerComponent.getMediaDevices().then((devices) => {
-      console.log(devices);
-      const videoDevices: MediaDeviceInfo[] = [];
-      for (const device of devices) {
-        if (device.kind.toString() === 'videoinput') {
-          videoDevices.push(device);
-        }
-      }
-      if (videoDevices.length > 0) {
-        let choosenDev;
-        for (const dev of videoDevices) {
-          if (dev.label.includes('back')) {
-            choosenDev = dev;
-            break;
-          }
-        }
-        if (choosenDev) {
-          this.qrScannerComponent.chooseCamera.next(choosenDev);
-        } else {
-          this.qrScannerComponent.chooseCamera.next(videoDevices[0]);
-        }
-      }
-    });
+  qrResultString: string;
 
-    this.qrScannerComponent.capturedQr.subscribe((result) => {
-      console.log(result);
-      this.notification.success('successfully scanned the qr code');
-    });
+  clearResult(): void {
+    this.qrResultString = null;
   }
+
+  onCodeResult(resultString: string) {
+    console.log(resultString);
+    this.qrResultString = resultString;
+    this.notification.success('QR code scanned');
+  }
+
+  // ngAfterViewInit(): void {
+  //   this.qrScannerComponent.getMediaDevices().then((devices) => {
+  //     console.log(devices);
+  //     const videoDevices: MediaDeviceInfo[] = [];
+  //     for (const device of devices) {
+  //       if (device.kind.toString() === 'videoinput') {
+  //         videoDevices.push(device);
+  //       }
+  //     }
+  //     if (videoDevices.length > 0) {
+  //       let choosenDev;
+  //       for (const dev of videoDevices) {
+  //         if (dev.label.includes('back')) {
+  //           choosenDev = dev;
+  //           break;
+  //         }
+  //       }
+  //       if (choosenDev) {
+  //         this.qrScannerComponent.chooseCamera.next(choosenDev);
+  //       } else {
+  //         this.qrScannerComponent.chooseCamera.next(videoDevices[0]);
+  //       }
+  //     }
+  //   });
+
+  //   this.qrScannerComponent.capturedQr.subscribe((result) => {
+  //     console.log(result);
+  //     this.notification.success('successfully scanned the qr code');
+  //   });
+  // }
 }
 
 /*

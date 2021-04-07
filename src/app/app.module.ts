@@ -48,6 +48,7 @@ import { CreatenotemodalComponent } from './createnotemodal/createnotemodal.comp
 import { MainfooterComponent } from './mainfooter/mainfooter.component';
 import { ScannerComponent } from './scanner/scanner.component';
 import { NgQrScannerModule } from 'angular2-qrscanner';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { NgQrScannerModule } from 'angular2-qrscanner';
     HttpClientModule,
     BrowserAnimationsModule,
     NgQrScannerModule,
+    ZXingScannerModule,
     //primeng
     InputTextModule,
     DropdownModule,
